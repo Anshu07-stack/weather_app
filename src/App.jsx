@@ -1,11 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect } from 'react'
 import './App.css'
+import {useDispatch} from 'react-redux'
+import { fetchWeather } from './store/actions/weatherAction'
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(fetchWeather('noida'))
+  },[])
   return (
     <>
     <h1 className='bg-red-500'>ewfheo</h1>

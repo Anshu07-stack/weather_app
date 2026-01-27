@@ -14,7 +14,7 @@ export const fetchWeatehrPending = () => {
   };
 };
 
-export const fetchWeatherSuccess = (data) => {
+export const fetchCurrentSuccess = (data) => {
   return {
     type: FETCH_CURRENT_SUCCESS,
     payload: data,
@@ -42,9 +42,20 @@ export const setCity = (city) => {
 };
 
 export const fetchWeather = (city)=>{
-  return async (dispatch)=>{
-     const response = await axios(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}`)
 
-     console.log(response)
+  return async (dispatch)=>{
+      dispatch(fetchWeatehrPending())
+ 
+    try {
+     const currentWeather = await axios(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}`)
+
+     const forecastDetails= await axios(`https://pro.openweathermap.org/data/2.5/forecast?q=${city}&appid=${api_key}`)
+    dispatch(fetchCurrentSuccess(currentWeather.data))
+    dispatch(fetchForecastSuccess(forecastDetails.data.list))
+    //  console.log(currentWeather,forecastDetails)
+    } catch (error) {
+    dispatch(fetchWeatherError('something went wrong'))     
+    }
+    
   }
 }

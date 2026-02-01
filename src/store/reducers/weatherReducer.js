@@ -5,6 +5,7 @@ import {
   FETCH_WEATHER_PENDING,
   SET_CITY,
 } from "../constants/weatherConstants";
+
 const initialState = {
   city: "Delhi",
   current: null,
@@ -40,6 +41,7 @@ export const weatherReducer = (state = initialState, action) => {
   } else if (action.type === SET_CITY) {
     return{
         ...state,
+        city:action.payload,
         loading:false,
         
     }

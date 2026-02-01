@@ -1,6 +1,19 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchWeather, setCity } from './store/actions/weatherAction'
 
 const Search = () => {
+  const city = useSelector(state=>state.weatherDetails.city)
+  
+  const dispatch = useDispatch()
+
+  const handleInput = (e)=>{
+    dispatch(setCity(e.target.value))
+  }
+
+  const handleSearchButton = ()=>{
+    dispatch(fetchWeather(city))
+  }
   return (
     <div className="join">
         <label className="input">
@@ -20,9 +33,17 @@ const Search = () => {
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input type="search" required placeholder="Search" />
+          <input 
+          type="search" 
+          required 
+          placeholder="Search"
+          value={city}
+          onChange={handleInput}
+           />
         </label>
-        <button className="btn btn-neutral join-item">FETCH</button>
+        <button 
+        onClick={handleSearchButton}
+        className="btn btn-success join-item">FETCH</button>
       </div>
   )
 }

@@ -43,7 +43,7 @@ const Search = () => {
         </label>
         <button 
         onClick={handleSearchButton}
-        className="btn btn-success join-item">FETCH</button>
+        className="btn btn-success join-item">Search</button>
       </div>
   )
 }

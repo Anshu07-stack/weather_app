@@ -7,7 +7,7 @@ import {
 } from "../constants/weatherConstants";
 
 const initialState = {
-  city: "Delhi",
+  city: "Rishikesh",
   current: null,
   forecast: null,
   loading: false,
@@ -27,11 +27,11 @@ export const weatherReducer = (state = initialState, action) => {
       current: action.payload,
     };
   } else if (action.type === FETCH_FORECAST_SUCCESS) {
-    return{
-        ...state,
-        loading:false,
-        forecast:action.payload
-    }
+    return {
+      ...state,
+      loading: false,
+      forecast: action.payload,
+    };
   } else if (action.error === FETCH_WEATHER_ERROR) {
     return {
       ...state,
@@ -39,12 +39,11 @@ export const weatherReducer = (state = initialState, action) => {
       error: action.payload,
     };
   } else if (action.type === SET_CITY) {
-    return{
-        ...state,
-        city:action.payload,
-        loading:false,
-        
-    }
+    return {
+      ...state,
+      city: action.payload,
+      loading: false,
+    };
   } else {
     return state;
   }
